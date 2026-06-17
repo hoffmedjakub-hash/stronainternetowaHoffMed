@@ -1,0 +1,19 @@
+FOLDER NA ZDJĘCIA I LOGO
+========================
+
+Wrzuć tutaj swoje pliki graficzne. Strona szuka ich pod konkretnymi nazwami,
+więc nazwij pliki DOKŁADNIE tak:
+
+1. logo.png   -> Twoje logo Hoff-Med (najlepiej PNG z przezroczystym tłem)
+2. jakub.jpg  -> Twoje zdjęcie (portret, do sekcji "O mnie")
+3. hero.jpg   -> Duże zdjęcie ze szkolenia (na samej górze strony)
+
+Dodatkowe wskazówki:
+- Format: zdjęcia jako .jpg, logo jako .png
+- Rozmiar zdjęć: najlepiej szerokość ok. 1200 px (żeby strona ładowała się szybko)
+- Jeśli plik nie istnieje, strona pokaże w tym miejscu szare pole zastępcze
+  z napisem "Tutaj wstaw zdjęcie" — nic się nie zepsuje.
+
+Jak zmienić nazwę pliku w Windows:
+- Kliknij plik prawym przyciskiem -> "Zmień nazwę" -> wpisz np. hero.jpg
+- Upewnij się, że na końcu jest .jpg lub .png (a nie np. .jpg.jpg)

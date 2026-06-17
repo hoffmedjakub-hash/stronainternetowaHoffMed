@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- TYTUŁ widoczny na karcie przeglądarki i w Google -->
+  <title>Hoff-Med – Szkolenia z pierwszej pomocy | Jakub Hoffmann, ratownik medyczny</title>
+
+  <!-- OPIS widoczny w wynikach wyszukiwania Google -->
+  <meta name="description" content="Profesjonalne szkolenia z pierwszej pomocy dla firm, organizacji i placówek edukacyjnych. BLS + AED, pierwsza pomoc dla dzieci, szkolenia przeciwpożarowe i próbne ewakuacje. Prowadzi Jakub Hoffmann – czynny ratownik medyczny." />
+
+  <!-- Ikonka strony na karcie przeglądarki (podmień na swoje logo) -->
+  <link rel="icon" href="images/logo1.jpg" />
+
+  <!-- Czcionki z Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Nasz plik ze stylami -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ===================== GÓRNE MENU ===================== -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="#top" class="brand">
+        <!-- Jeśli wgrasz logo do folderu images/, pokaże się obrazek.
+             Dopóki go nie ma, widać tekst poniżej. -->
+        <img src="images/logo1.jpg" alt="Hoff-Med logo" class="brand-logo" onerror="this.style.display='none'" />
+        <span class="brand-text">Hoff-Med</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#o-mnie">O mnie</a>
+        <a href="#szkolenia">Szkolenia</a>
+        <a href="#dlaczego">Dlaczego ja</a>
+        <a href="#opinie">Opinie</a>
+        <a href="#kontakt" class="nav-cta">Kontakt</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Otwórz menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO (pierwszy ekran) ===================== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Szkolenia z pierwszej pomocy dla firm i organizacji</p>
+        <h1>Pierwsza pomoc, której Twój zespół naprawdę się nauczy</h1>
+        <p class="lead">
+          Nazywam się <strong>Jakub Hoffmann</strong> i jestem czynnym ratownikiem
+          medycznym. Prowadzę praktyczne szkolenia z pierwszej pomocy dla firm,
+          organizacji i placówek edukacyjnych w całej Polsce — oparte na realnych
+          sytuacjach, nie na nudnej teorii.
+        </p>
+        <div class="hero-buttons">
+          <a href="tel:+48661501821" class="btn btn-primary">Zadzwoń: 661 501 821</a>
+          <a href="#kontakt" class="btn btn-ghost">Zapytaj o ofertę</a>
+        </div>
+        <ul class="hero-badges">
+          <li>✓ Czynny ratownik medyczny</li>
+          <li>✓ Szkolenia w całej Polsce</li>
+          <li>✓ Dojazd do klienta</li>
+        </ul>
+      </div>
+
+      <div class="hero-image">
+        <!-- Podmień zdjęcie na swoje (np. ze szkolenia). Patrz README.md -->
+        <img src="images/hero.jpg" alt="Szkolenie z pierwszej pomocy" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'" />
+        <span class="img-placeholder-text">Tutaj wstaw zdjęcie ze szkolenia</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== O MNIE ===================== -->
+  <section class="section" id="o-mnie">
+    <div class="container two-col">
+      <div class="about-photo">
+        <img src="images/jakub.jpg" alt="Jakub Hoffmann – ratownik medyczny" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'" />
+        <span class="img-placeholder-text">Tutaj wstaw swoje zdjęcie</span>
+      </div>
+      <div>
+        <p class="eyebrow">O mnie</p>
+        <h2>Uczę pierwszej pomocy tak, jak wygląda ona naprawdę</h2>
+        <p>
+          Od 3 lat pracuję jako <strong>ratownik medyczny</strong> w zespole
+          ratownictwa medycznego. Codziennie widzę, co decyduje o życiu i zdrowiu
+          w pierwszych minutach zdarzenia — i tę wiedzę przekazuję na szkoleniach.
+        </p>
+        <p>
+          Przeszkoliłem pracowników wielu firm w całej Polsce. Oprócz pierwszej
+          pomocy prowadzę także <strong>szkolenia przeciwpożarowe</strong> oraz
+          organizuję <strong>próbne ewakuacje</strong>, dzięki czemu mogę
+          kompleksowo zadbać o bezpieczeństwo w Twojej organizacji.
+        </p>
+        <ul class="check-list">
+          <li>Praktyka zamiast suchej teorii — dużo ćwiczeń na fantomach</li>
+          <li>Realne scenariusze dopasowane do Twojej branży</li>
+          <li>Spokojny, zrozumiały język — bez medycznego żargonu</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SZKOLENIA ===================== -->
+  <section class="section section-alt" id="szkolenia">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Oferta</p>
+        <h2>Szkolenia, które prowadzę</h2>
+        <p class="section-sub">
+          Każde szkolenie dopasowuję do potrzeb i wielkości Twojego zespołu.
+          Ceny ustalam indywidualnie — napisz lub zadzwoń po wycenę.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.8 5.6a4.5 4.5 0 0 0-6.4 0L12 8l-2.4-2.4a4.5 4.5 0 0 0-6.4 6.4l2.1 2.1H7l1.5-2.5 2 4 1.5-3 1 1.5h4.3l2.5-2.6a4.5 4.5 0 0 0 0-6.3z" />
+            </svg>
+          </div>
+          <h3>BLS + AED</h3>
+          <p>
+            Podstawowe zabiegi resuscytacyjne i obsługa automatycznego
+            defibrylatora (AED). Po szkoleniu uczestnik wie, jak ratować życie
+            do przyjazdu pogotowia.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="6.5" r="3" />
+              <path d="M5.5 21v-1a6.5 6.5 0 0 1 13 0v1" />
+            </svg>
+          </div>
+          <h3>Pierwsza pomoc dla dzieci</h3>
+          <p>
+            Postępowanie w nagłych sytuacjach u najmłodszych — zadławienia,
+            urazy, gorączka, drgawki. Idealne dla rodziców, opiekunów i placówek.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="3" width="16" height="18" rx="1" />
+              <path d="M9 7h0M9 11h0M9 15h0M15 7h0M15 11h0M15 15h0" />
+              <path d="M10 21v-3h4v3" />
+            </svg>
+          </div>
+          <h3>Pierwsza pomoc w firmach</h3>
+          <p>
+            Szkolenie dla pracowników i wyznaczonych osób do udzielania pierwszej
+            pomocy. Spełnia wymagania BHP i podnosi bezpieczeństwo w zakładzie.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.3L19 13" />
+              <path d="M3 13h18v4a1 1 0 0 1-1 1h-1.2a2 2 0 0 1-3.6 0H8.8a2 2 0 0 1-3.6 0H4a1 1 0 0 1-1-1z" />
+              <path d="M7.5 16.5h0M16.5 16.5h0" />
+            </svg>
+          </div>
+          <h3>Zajęcia dla szkół nauki jazdy</h3>
+          <p>
+            Praktyczne zajęcia z pierwszej pomocy dla kursantów — zgodne z
+            programem szkolenia kandydatów na kierowców.
+          </p>
+        </article>
+      </div>
+
+      <div class="extra-offer">
+        <p>
+          <strong>Dodatkowo:</strong> szkolenia przeciwpożarowe oraz organizacja
+          próbnych ewakuacji. Zapytaj o pakiet kompleksowy dla swojej firmy.
+        </p>
+        <a href="#kontakt" class="btn btn-primary">Zapytaj o ofertę</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DLACZEGO JA ===================== -->
+  <section class="section" id="dlaczego">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Dlaczego ja</p>
+        <h2>Co zyskuje Twoja organizacja</h2>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-num">01</div>
+          <h3>Wiedza z pierwszej linii</h3>
+          <p>Uczę na podstawie realnych wyjazdów w karetce, a nie tylko podręcznika.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-num">02</div>
+          <h3>Praktyka i ćwiczenia</h3>
+          <p>Uczestnicy ćwiczą na sprzęcie, dzięki czemu zapamiętują na długo.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-num">03</div>
+          <h3>Dojazd do Ciebie</h3>
+          <p>Szkolenie organizuję u Was, w dogodnym terminie, w całej Polsce.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-num">04</div>
+          <h3>Kompleksowe bezpieczeństwo</h3>
+          <p>Pierwsza pomoc, ochrona przeciwpożarowa i ewakuacje w jednym miejscu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPINIE ===================== -->
+  <section class="section section-alt" id="opinie">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Opinie</p>
+        <h2>Co mówią klienci</h2>
+      </div>
+      <div class="cards">
+        <!-- Podmień treść i podpisy na swoje prawdziwe opinie -->
+        <blockquote class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>„Szkolenie prowadzone bardzo profesjonalnie i konkretnie. Pracownicy
+             byli zaangażowani i wyszli z realną wiedzą."</p>
+          <footer>— [Nazwa firmy / imię klienta]</footer>
+        </blockquote>
+        <blockquote class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>„Dużo praktyki, świetny kontakt, wszystko wytłumaczone prostym
+             językiem. Polecamy każdej firmie."</p>
+          <footer>— [Nazwa firmy / imię klienta]</footer>
+        </blockquote>
+        <blockquote class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>„Pan Jakub potrafi przekazać wiedzę tak, że zostaje w głowie.
+             Na pewno skorzystamy ponownie."</p>
+          <footer>— [Nazwa firmy / imię klienta]</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== KONTAKT ===================== -->
+  <section class="section contact" id="kontakt">
+    <div class="container contact-inner">
+      <div>
+        <p class="eyebrow eyebrow-light">Kontakt</p>
+        <h2>Porozmawiajmy o szkoleniu dla Twojego zespołu</h2>
+        <p class="contact-sub">
+          Napisz lub zadzwoń — przygotuję ofertę dopasowaną do Twoich potrzeb.
+        </p>
+      </div>
+      <div class="contact-cards">
+        <a href="tel:+48661501821" class="contact-card">
+          <span class="contact-card-label">Telefon</span>
+          <span class="contact-card-value">661 501 821</span>
+        </a>
+        <a href="mailto:hoffmed.jakub@gmail.com" class="contact-card">
+          <span class="contact-card-label">E-mail</span>
+          <span class="contact-card-value">hoffmed.jakub@gmail.com</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STOPKA ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Hoff-Med</strong> — ratownik medyczny Jakub Hoffmann
+      </div>
+      <div class="footer-contact">
+        <a href="tel:+48661501821">661 501 821</a>
+        <a href="mailto:hoffmed.jakub@gmail.com">hoffmed.jakub@gmail.com</a>
+      </div>
+      <div class="footer-copy">© <span id="year"></span> Hoff-Med. Wszelkie prawa zastrzeżone.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

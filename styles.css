@@ -1,0 +1,350 @@
+/* =========================================================
+   USTAWIENIA OGÓLNE I KOLORY
+   Kolory możesz łatwo zmienić tutaj — wszystko zaktualizuje
+   się automatycznie w całej stronie.
+   ========================================================= */
+:root {
+  --red: #e11d2a;          /* główny czerwony (pierwsza pomoc) */
+  --red-dark: #b91622;     /* ciemniejszy czerwony (najazd myszką) */
+  --navy: #0f2540;         /* granat – teksty i sekcja kontakt */
+  --ink: #1c2733;          /* główny kolor tekstu */
+  --muted: #5b6772;        /* szary tekst pomocniczy */
+  --bg: #ffffff;           /* białe tło */
+  --bg-alt: #f5f7fa;       /* delikatnie szare tło sekcji */
+  --line: #e6e9ee;         /* kolor cienkich linii / ramek */
+  --radius: 14px;          /* zaokrąglenie rogów */
+  --shadow: 0 10px 30px rgba(15, 37, 64, 0.08);
+  --max: 1140px;           /* maksymalna szerokość treści */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+h1, h2, h3 { line-height: 1.2; color: var(--navy); font-weight: 800; }
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); letter-spacing: -0.01em; }
+h3 { font-size: 1.2rem; }
+
+p { color: var(--muted); }
+
+a { color: inherit; text-decoration: none; }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+.eyebrow-light { color: #ff9ba1; }
+
+/* =========================================================
+   PRZYCISKI
+   ========================================================= */
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--red); color: #fff; box-shadow: 0 8px 20px rgba(225, 29, 42, 0.25); }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-ghost { background: transparent; color: var(--navy); border-color: var(--line); }
+.btn-ghost:hover { border-color: var(--navy); }
+
+/* =========================================================
+   GÓRNE MENU
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--navy); font-size: 1.25rem; }
+.brand-logo { height: 46px; width: auto; border-radius: 8px; }
+.brand-text { letter-spacing: -0.01em; }
+
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a { color: var(--ink); font-weight: 500; font-size: 0.98rem; }
+.nav a:hover { color: var(--red); }
+.nav .nav-cta {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+}
+.nav .nav-cta:hover { background: var(--red); color: #fff; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span {
+  width: 26px; height: 3px; background: var(--navy); border-radius: 2px;
+  transition: .2s;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero { padding: 72px 0 80px; background: linear-gradient(180deg, #fff 0%, var(--bg-alt) 100%); }
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero-text .lead { font-size: 1.15rem; margin: 20px 0 28px; max-width: 540px; }
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-badges {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 28px;
+  font-size: 0.92rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+.hero-image {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 360px;
+  box-shadow: var(--shadow);
+}
+.hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Zastępcze tło, gdy brak zdjęcia */
+.img-placeholder {
+  background: repeating-linear-gradient(45deg, #eef1f6, #eef1f6 12px, #e7ebf2 12px, #e7ebf2 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-placeholder-text {
+  display: none;
+  color: #9aa5b1;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+}
+.img-placeholder .img-placeholder-text { display: block; }
+
+/* =========================================================
+   SEKCJE OGÓLNE
+   ========================================================= */
+.section { padding: 80px 0; }
+.section-alt { background: var(--bg-alt); }
+.section-head { max-width: 680px; margin: 0 auto 48px; text-align: center; }
+.section-sub { margin-top: 14px; font-size: 1.05rem; }
+
+.two-col {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+}
+.about-photo {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 380px;
+  box-shadow: var(--shadow);
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.check-list { list-style: none; margin-top: 22px; display: grid; gap: 12px; }
+.check-list li { position: relative; padding-left: 32px; color: var(--ink); }
+.check-list li::before {
+  content: "✓";
+  position: absolute; left: 0; top: 0;
+  color: var(--red); font-weight: 800;
+  background: #fde8e9; width: 22px; height: 22px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   KAFELKI (oferta i opinie)
+   ========================================================= */
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.card-icon {
+  width: 52px; height: 52px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: #fde8e9;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-icon svg { width: 28px; height: 28px; }
+.card h3 { margin-bottom: 10px; }
+.card p { font-size: 0.95rem; }
+
+.extra-offer {
+  margin-top: 40px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.extra-offer p { color: var(--ink); }
+
+/* =========================================================
+   DLACZEGO JA
+   ========================================================= */
+.features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.feature {
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+}
+.feature-num { font-weight: 800; color: var(--red); font-size: 1.1rem; margin-bottom: 10px; }
+.feature h3 { margin-bottom: 8px; }
+.feature p { font-size: 0.95rem; }
+
+/* =========================================================
+   OPINIE
+   ========================================================= */
+.cards .testimonial {
+  grid-column: span 1 / span 1;
+}
+.testimonial {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+.testimonial .stars { color: #f5a623; letter-spacing: 2px; margin-bottom: 12px; }
+.testimonial p { color: var(--ink); font-style: italic; }
+.testimonial footer { margin-top: 16px; font-weight: 600; color: var(--navy); font-style: normal; }
+/* Opinie: 3 w rzędzie zamiast 4 */
+#opinie .cards { grid-template-columns: repeat(3, 1fr); }
+
+/* =========================================================
+   KONTAKT
+   ========================================================= */
+.contact { background: var(--navy); }
+.contact h2 { color: #fff; }
+.contact-sub { color: #c3cedd; margin-top: 12px; font-size: 1.05rem; }
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+.contact-cards { display: grid; gap: 16px; }
+.contact-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background .2s ease, transform .15s ease;
+}
+.contact-card:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-2px); }
+.contact-card-label { color: #9fb0c6; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.contact-card-value { color: #fff; font-size: 1.25rem; font-weight: 700; }
+
+/* =========================================================
+   STOPKA
+   ========================================================= */
+.site-footer { background: #0a1a2e; color: #c3cedd; padding: 36px 0; }
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 0.92rem;
+}
+.footer-contact { display: flex; gap: 22px; }
+.footer-contact a:hover, .site-footer a:hover { color: #fff; }
+.footer-copy { color: #7b8aa0; }
+
+/* =========================================================
+   WERSJA MOBILNA (telefony i tablety)
+   ========================================================= */
+@media (max-width: 900px) {
+  .hero-inner, .two-col, .contact-inner { grid-template-columns: 1fr; }
+  .hero-image, .about-photo { min-height: 280px; order: -1; }
+  .cards, .features { grid-template-columns: repeat(2, 1fr); }
+  #opinie .cards { grid-template-columns: 1fr; }
+
+  .nav {
+    position: absolute;
+    top: 72px; left: 0; right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 8px 24px 20px;
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    display: none;
+  }
+  .nav.open { display: flex; }
+  .nav a { width: 100%; padding: 12px 0; }
+  .nav .nav-cta { width: 100%; text-align: center; margin-top: 8px; }
+  .nav-toggle { display: flex; }
+}
+
+@media (max-width: 560px) {
+  .cards, .features { grid-template-columns: 1fr; }
+  .section { padding: 56px 0; }
+  .hero { padding: 48px 0 56px; }
+}
