@@ -270,6 +270,17 @@ a { color: inherit; text-decoration: none; }
 .testimonial .stars { color: #f5a623; letter-spacing: 2px; margin-bottom: 12px; }
 .testimonial p { color: var(--ink); font-style: italic; }
 .testimonial footer { margin-top: 16px; font-weight: 600; color: var(--navy); font-style: normal; }
+.t-source {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
 /* Opinie: 3 w rzędzie zamiast 4 */
 #opinie .cards { grid-template-columns: repeat(3, 1fr); }
 
