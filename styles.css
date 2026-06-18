@@ -27,7 +27,16 @@ body {
   background: var(--bg);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* zabezpieczenie przed bocznym przewijaniem na telefonie */
 }
+
+/* Obrazy nigdy nie wychodzą poza szerokość ekranu */
+img { max-width: 100%; }
+
+/* Długie słowa/adresy nie rozpychają układu */
+.contact-card-value,
+.footer-contact a,
+.t-source { overflow-wrap: anywhere; word-break: break-word; }
 
 .container {
   width: 100%;
@@ -369,4 +378,17 @@ a { color: inherit; text-decoration: none; }
   .cards, .features, .offer-cards { grid-template-columns: 1fr; }
   .section { padding: 56px 0; }
   .hero { padding: 48px 0 56px; }
+  .container { padding: 0 18px; }
+
+  /* Długi e-mail nie rozpycha kafelka kontaktu */
+  .contact-card-value { font-size: 1.02rem; }
+  .contact-card { padding: 18px 20px; }
+
+  /* Boksy z przyciskiem (oferta) układają się w pionie */
+  .extra-offer { padding: 22px 20px; }
+  .extra-offer .btn { width: 100%; text-align: center; }
+
+  /* Stopka czytelnie jedna pod drugą */
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-contact { flex-wrap: wrap; gap: 14px; }
 }
