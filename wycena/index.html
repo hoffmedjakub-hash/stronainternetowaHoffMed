@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Wycena — narzędzie wewnętrzne</title>
+<style>
+  :root{ --red:#e11d2a; --navy:#0f2540; --ink:#1c2733; --muted:#5b6772; --line:#e6e9ee; --bg:#f5f7fa; --radius:12px; }
+  *{box-sizing:border-box;}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);margin:0;line-height:1.55;padding:24px;}
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{font-size:1.5rem;color:var(--navy);margin:0 0 4px;}
+  .sub{color:var(--muted);margin:0 0 20px;font-size:.92rem;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:0 8px 24px rgba(15,37,64,.05);}
+  h2{font-size:1.1rem;color:var(--navy);margin:0 0 16px;}
+  label{display:block;font-weight:600;color:var(--navy);font-size:.9rem;margin:0 0 6px;}
+  .field{margin-bottom:16px;}
+  input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font-size:1rem;font-family:inherit;background:#fff;color:var(--ink);}
+  input:focus,select:focus{outline:2px solid var(--red);border-color:var(--red);}
+  input:disabled{background:#f1f1f4;color:#a0a4ab;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .check{display:flex;align-items:center;gap:9px;font-weight:600;color:var(--navy);font-size:.95rem;cursor:pointer;}
+  .check input{width:auto;}
+  .result{background:var(--navy);color:#fff;border-radius:var(--radius);padding:22px;margin-bottom:18px;}
+  .result h2{color:#fff;}
+  .line{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:.95rem;}
+  .line span:first-child{color:#c3cedd;}
+  .line span:last-child{white-space:nowrap;}
+  .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;gap:12px;}
+  .total .lbl{font-size:1rem;color:#c3cedd;}
+  .total .val{font-size:1.7rem;font-weight:800;text-align:right;}
+  .btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;background:var(--red);color:#fff;font-weight:700;font-size:.95rem;padding:12px 20px;border-radius:999px;margin-top:14px;}
+  .btn:hover{background:#b91622;}
+  .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);}
+  .small{font-size:.82rem;color:var(--muted);}
+  details{margin-top:4px;}
+  summary{cursor:pointer;font-weight:700;color:var(--navy);padding:6px 0;}
+  .rate-row{display:grid;grid-template-columns:1fr 130px;gap:12px;align-items:center;margin-bottom:10px;}
+  .rate-row.range{grid-template-columns:1fr 100px 100px;}
+  .rate-row label{margin:0;}
+  .subhead{font-weight:700;color:var(--navy);font-size:.9rem;margin:18px 0 10px;}
+  .note{background:#fff7e6;border:1px solid #ffe2a8;color:#7a5a00;padding:10px 14px;border-radius:9px;font-size:.85rem;margin-bottom:16px;}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;}
+  /* Bramka na hasło */
+  #gate{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:24px;z-index:1000;}
+  #gate .box{background:#fff;border-radius:var(--radius);padding:28px;max-width:360px;width:100%;text-align:center;}
+  #gate h2{margin:0 0 6px;}
+  #gate p{color:var(--muted);font-size:.88rem;margin:0 0 18px;}
+  #gate input{margin-bottom:12px;text-align:center;}
+  #gate .err{color:var(--red);font-size:.85rem;min-height:18px;margin-top:6px;}
+  #app{display:none;}
+  @media(max-width:560px){ .row,.rate-row,.rate-row.range{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <h2>Dostęp wewnętrzny</h2>
+    <p>To narzędzie do wyceny. Podaj hasło, aby kontynuować.</p>
+    <input type="password" id="pass" placeholder="Hasło" autocomplete="off" />
+    <button class="btn" id="enter" type="button" style="width:100%;">Wejdź</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<div id="app">
+<div class="wrap">
+
+  <h1>Kalkulator wyceny — Hoff-Med</h1>
+  <p class="sub">Narzędzie wewnętrzne. Stawki zapisują się w tej przeglądarce.</p>
+
+  <div class="note">Stawki za osobę i widełki pakietów zmienisz w „Ustawienia stawek” — zapisują się automatycznie.</div>
+
+  <div class="result">
+    <h2>Wycena</h2>
+    <div id="lines"></div>
+    <div class="total"><span class="lbl">Razem (orientacyjnie)</span><span class="val" id="total">—</span></div>
+    <button class="btn ghost" id="copyBtn" type="button">Kopiuj wycenę do e-maila</button>
+  </div>
+
+  <div class="card">
+    <h2>Parametry</h2>
+    <div class="field"><label for="type">Rodzaj usługi</label><select id="type"></select></div>
+    <div id="ppWrap" class="row">
+      <div class="field"><label for="people">Liczba uczestników</label><input type="number" id="people" min="1" value="10" /></div>
+      <div class="field"><label for="groups">Liczba grup</label><input type="number" id="groups" min="1" value="1" /></div>
+    </div>
+    <p class="small" id="flatHint" style="display:none;margin:-6px 0 14px;">Pakiet ewakuacji wyceniany jest ryczałtem (widełki) — liczba osób nie wpływa na cenę.</p>
+    <div class="field"><label class="check"><input type="checkbox" id="travelOn" /> Dolicz dojazd</label></div>
+    <div class="row">
+      <div class="field"><label for="km">Odległość w jedną stronę (km)</label><input type="number" id="km" min="0" value="0" /></div>
+      <div class="field" style="display:flex;align-items:flex-end;"><label class="check"><input type="checkbox" id="roundTrip" checked /> Licz w obie strony</label></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <details id="settings">
+      <summary>⚙️ Ustawienia stawek (kliknij, aby rozwinąć)</summary>
+      <p class="subhead">Szkolenia — cena za 1 osobę (zł)</p>
+      <div id="ratesPP"></div>
+      <p class="subhead">Ewakuacje — pakiet ryczałtowy (zł, od – do)</p>
+      <div id="ratesFlat"></div>
+      <hr style="border:none;border-top:1px solid var(--line);margin:18px 0;" />
+      <div class="rate-row"><label>Stawka za dojazd (zł/km)</label><input type="number" id="rateKm" min="0" step="0.1" /></div>
+      <div class="rate-row"><label>Cena minimalna szkolenia (zł)</label><input type="number" id="minPrice" min="0" /></div>
+      <div class="rate-row"><label>Rabat dla grup od (liczba osób)</label><input type="number" id="discFrom" min="0" /></div>
+      <div class="rate-row"><label>Wysokość rabatu (%)</label><input type="number" id="discPct" min="0" max="100" /></div>
+      <div class="actions" style="margin-top:14px;">
+        <button class="btn" id="saveBtn" type="button">Zapisano ✓</button>
+        <button class="btn ghost" id="resetBtn" type="button" style="color:var(--navy);border-color:var(--line);">Przywróć przykładowe</button>
+      </div>
+    </details>
+  </div>
+
+  <p class="small">Wynik jest orientacyjny i służy do wyceny wewnętrznej.</p>
+</div>
+</div>
+
+<script>
+// ====== HASŁO DOSTĘPU — zmień poniżej na swoje ======
+const HASLO = "hoffmed2026";
+// ====================================================
+
+(function(){
+  const gate=document.getElementById("gate"), app=document.getElementById("app"),
+        pass=document.getElementById("pass"), err=document.getElementById("err");
+  function open(){ gate.style.display="none"; app.style.display="block"; try{ sessionStorage.setItem("hm_ok","1"); }catch(e){} init(); }
+  function tryPass(){ if(pass.value===HASLO){ open(); } else { err.textContent="Nieprawidłowe hasło."; pass.value=""; pass.focus(); } }
+  document.getElementById("enter").addEventListener("click", tryPass);
+  pass.addEventListener("keydown", e=>{ if(e.key==="Enter") tryPass(); });
+  try{ if(sessionStorage.getItem("hm_ok")==="1"){ open(); } else { pass.focus(); } }catch(e){ pass.focus(); }
+})();
+
+let started=false;
+function init(){
+  if(started) return; started=true;
+
+  const PP_DEF={ "BLS + AED":80,"Pierwsza pomoc dla dzieci":70,"Pierwsza pomoc w firmach":80,"Zajęcia dla szkół nauki jazdy":25,"Szkolenia przeciwpożarowe":60,"Szkolenia ewakuacyjne":60,"Próbne ewakuacje":50 };
+  const FLAT_DEF={ "Próbna ewakuacja — mały obiekt":{min:300,max:800}, "Próbna ewakuacja — średnia firma":{min:800,max:1500}, "Ewakuacja z dokumentacją i omówieniem":{min:800,max:2000} };
+  const KEY="hoffmed_wycena_v2";
+  const clone=o=>JSON.parse(JSON.stringify(o));
+  const fresh=()=>({pp:clone(PP_DEF),flat:clone(FLAT_DEF),rateKm:2,minPrice:500,discFrom:0,discPct:0});
+  function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.pp&&s.flat) return s; }catch(e){} return fresh(); }
+  let cfg=load(); const save=()=>localStorage.setItem(KEY,JSON.stringify(cfg));
+
+  const typeSel=document.getElementById("type"), ratesPP=document.getElementById("ratesPP"), ratesFlat=document.getElementById("ratesFlat");
+  function build(){
+    typeSel.innerHTML=""; ratesPP.innerHTML=""; ratesFlat.innerHTML="";
+    const g1=document.createElement("optgroup"); g1.label="Szkolenia (cena za osobę)";
+    const g2=document.createElement("optgroup"); g2.label="Ewakuacje (pakiet ryczałtowy)";
+    Object.keys(cfg.pp).forEach(name=>{
+      const o=document.createElement("option"); o.value=name; o.textContent=name; g1.appendChild(o);
+      const row=document.createElement("div"); row.className="rate-row"; row.innerHTML='<label>'+name+'</label>';
+      const inp=document.createElement("input"); inp.type="number"; inp.min="0"; inp.value=cfg.pp[name];
+      inp.addEventListener("input",()=>{ cfg.pp[name]=num(inp.value); save(); calc(); flash(); });
+      row.appendChild(inp); ratesPP.appendChild(row);
+    });
+    Object.keys(cfg.flat).forEach(name=>{
+      const o=document.createElement("option"); o.value=name; o.textContent=name; g2.appendChild(o);
+      const row=document.createElement("div"); row.className="rate-row range"; row.innerHTML='<label>'+name+'</label>';
+      const lo=document.createElement("input"); lo.type="number"; lo.min="0"; lo.value=cfg.flat[name].min;
+      const hi=document.createElement("input"); hi.type="number"; hi.min="0"; hi.value=cfg.flat[name].max;
+      lo.addEventListener("input",()=>{ cfg.flat[name].min=num(lo.value); save(); calc(); flash(); });
+      hi.addEventListener("input",()=>{ cfg.flat[name].max=num(hi.value); save(); calc(); flash(); });
+      row.appendChild(lo); row.appendChild(hi); ratesFlat.appendChild(row);
+    });
+    typeSel.appendChild(g1); typeSel.appendChild(g2);
+  }
+  const rateKm=document.getElementById("rateKm"),minPrice=document.getElementById("minPrice"),discFrom=document.getElementById("discFrom"),discPct=document.getElementById("discPct");
+  function fillSettings(){ rateKm.value=cfg.rateKm; minPrice.value=cfg.minPrice; discFrom.value=cfg.discFrom; discPct.value=cfg.discPct; }
+  [["rateKm",rateKm],["minPrice",minPrice],["discFrom",discFrom],["discPct",discPct]].forEach(([k,el])=>{ el.addEventListener("input",()=>{ cfg[k]=num(el.value); save(); calc(); flash(); }); });
+
+  const people=document.getElementById("people"),groups=document.getElementById("groups"),km=document.getElementById("km"),travelOn=document.getElementById("travelOn"),roundTrip=document.getElementById("roundTrip");
+  [typeSel,people,groups,km,travelOn,roundTrip].forEach(el=>el.addEventListener("input",calc));
+
+  function num(v){ const n=parseFloat(String(v).replace(",",".")); return isNaN(n)?0:n; }
+  function zl(v){ return Math.round(v).toLocaleString("pl-PL")+" zł"; }
+  function travelLabel(){ return "Dojazd "+num(km.value)+" km"+(roundTrip.checked?" × 2 (tam i z powrotem)":"")+" × "+zl(cfg.rateKm); }
+
+  let last={};
+  function calc(){
+    const type=typeSel.value, isFlat=!!cfg.flat[type];
+    people.disabled=isFlat; groups.disabled=isFlat;
+    document.getElementById("flatHint").style.display=isFlat?"block":"none";
+    let travel=0; if(travelOn.checked){ travel=num(km.value)*cfg.rateKm*(roundTrip.checked?2:1); }
+    const L=document.getElementById("lines"); L.innerHTML="";
+    if(isFlat){
+      const f=cfg.flat[type];
+      addLine(L,"Pakiet: "+type, zl(f.min)+" – "+zl(f.max));
+      if(travel>0) addLine(L, travelLabel(), zl(travel));
+      const lo=f.min+travel, hi=f.max+travel;
+      document.getElementById("total").textContent=zl(lo)+" – "+zl(hi);
+      last={type,flat:true,lo,hi,travel};
+    } else {
+      const rate=cfg.pp[type]||0, ppl=Math.max(0,Math.round(num(people.value))), grp=Math.max(1,Math.round(num(groups.value)));
+      const base=rate*ppl*grp; let disc=0;
+      if(cfg.discFrom>0&&cfg.discPct>0&&ppl>=cfg.discFrom) disc=base*cfg.discPct/100;
+      let core=base-disc, minOn=false;
+      if(cfg.minPrice>0&&core<cfg.minPrice){ core=cfg.minPrice; minOn=true; }
+      const total=core+travel;
+      addLine(L, type+" — "+ppl+" os."+(grp>1?" × "+grp+" gr.":"")+" × "+zl(rate), zl(base));
+      if(disc>0) addLine(L,"Rabat "+cfg.discPct+"% (od "+cfg.discFrom+" os.)","− "+zl(disc));
+      if(minOn) addLine(L,"Zastosowano cenę minimalną",zl(cfg.minPrice));
+      if(travel>0) addLine(L,travelLabel(),zl(travel));
+      document.getElementById("total").textContent=zl(total);
+      last={type,flat:false,ppl,grp,travel,total};
+    }
+  }
+  function addLine(box,a,b){ const d=document.createElement("div"); d.className="line"; d.innerHTML='<span>'+a+'</span><span>'+b+'</span>'; box.appendChild(d); }
+
+  document.getElementById("copyBtn").addEventListener("click",()=>{
+    const t=last; let txt="Wycena — Hoff-Med\nRodzaj: "+t.type+"\n";
+    if(t.flat){ if(t.travel>0) txt+="Dojazd: "+zl(t.travel)+"\n"; txt+="Cena orientacyjna: "+zl(t.lo)+" – "+zl(t.hi)+"\n"; }
+    else { txt+="Liczba uczestników: "+t.ppl+(t.grp>1?(" × "+t.grp+" grupy"):"")+"\n"; if(t.travel>0) txt+="Dojazd: "+zl(t.travel)+"\n"; txt+="Cena orientacyjna: "+zl(t.total)+"\n"; }
+    navigator.clipboard.writeText(txt).then(()=>{ const b=document.getElementById("copyBtn"); const o=b.textContent; b.textContent="Skopiowano ✓"; setTimeout(()=>b.textContent=o,1500); }).catch(()=>{});
+  });
+
+  function flash(){ document.getElementById("saveBtn").textContent="Zapisano ✓"; }
+  document.getElementById("saveBtn").addEventListener("click",()=>{ save(); flash(); });
+  document.getElementById("resetBtn").addEventListener("click",()=>{ if(confirm("Przywrócić przykładowe stawki?")){ cfg=fresh(); save(); build(); fillSettings(); calc(); } });
+
+  build(); fillSettings(); calc();
+}
+</script>
+</body>
+</html>
