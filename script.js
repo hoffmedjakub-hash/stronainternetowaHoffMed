@@ -13,3 +13,11 @@ nav.querySelectorAll('a').forEach((link) => {
 
 // Automatyczne wstawienie aktualnego roku w stopce
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Przycisk "do góry" — pokaż po przewinięciu w dół
+const toTop = document.getElementById('toTop');
+if (toTop) {
+  window.addEventListener('scroll', () => {
+    toTop.classList.toggle('show', window.scrollY > 500);
+  });
+}
