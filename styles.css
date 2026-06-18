@@ -260,6 +260,9 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 2px solid var(--line);
 }
 .offer-intro { margin-bottom: 30px; align-items: center; }
+/* Wysokie zdjęcie pożarowe – ograniczona wysokość i ładne kadrowanie */
+.offer-intro .about-photo { min-height: 0; height: 420px; }
+.offer-intro .about-photo img { object-position: center; }
 .offer-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 
 /* =========================================================
@@ -353,6 +356,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .hero-inner, .two-col, .contact-inner { grid-template-columns: 1fr; }
   .hero-image, .about-photo { min-height: 280px; order: -1; }
+  .offer-intro .about-photo { height: 300px; }
   .cards, .features, .offer-cards { grid-template-columns: repeat(2, 1fr); }
   #opinie .cards { grid-template-columns: 1fr; }
 
