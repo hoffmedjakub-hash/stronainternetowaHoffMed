@@ -79,6 +79,7 @@
         <a href="#szkolenia">Szkolenia</a>
         <a href="#dlaczego">Dlaczego ja</a>
         <a href="#opinie">Opinie</a>
+        <a href="#galeria">Galeria</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt" class="nav-cta">Kontakt</a>
       </nav>
@@ -398,8 +399,34 @@
     </div>
   </section>
 
+  <!-- ===================== GALERIA ===================== -->
+  <section class="section" id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Galeria</p>
+        <h2>Zdjęcia ze szkoleń</h2>
+        <p class="section-sub">
+          Praktyka, ćwiczenia i realne sytuacje — zobacz, jak wyglądają moje
+          szkolenia. Kliknij zdjęcie, aby je powiększyć.
+        </p>
+      </div>
+      <div class="gallery">
+        <button class="gallery-item" type="button"><img src="images/galeria/1.jpg" alt="Zdjęcie ze szkolenia 1" loading="lazy" decoding="async" onerror="this.closest('.gallery-item').style.display='none'" /></button>
+        <button class="gallery-item" type="button"><img src="images/galeria/2.jpg" alt="Zdjęcie ze szkolenia 2" loading="lazy" decoding="async" onerror="this.closest('.gallery-item').style.display='none'" /></button>
+        <button class="gallery-item" type="button"><img src="images/galeria/3.jpg" alt="Zdjęcie ze szkolenia 3" loading="lazy" decoding="async" onerror="this.closest('.gallery-item').style.display='none'" /></button>
+        <button class="gallery-item" type="button"><img src="images/galeria/4.jpg" alt="Zdjęcie ze szkolenia 4" loading="lazy" decoding="async" onerror="this.closest('.gallery-item').style.display='none'" /></button>
+        <button class="gallery-item" type="button"><img src="images/galeria/5.jpg" alt="Zdjęcie ze szkolenia 5" loading="lazy" decoding="async" onerror="this.closest('.gallery-item').style.display='none'" /></button>
+        <button class="gallery-item" type="button"><img src="images/galeria/6.jpg" alt="Zdjęcie ze szkolenia 6" loading="lazy" decoding="async" onerror="this.closest('.gallery-item').style.display='none'" /></button>
+      </div>
+      <p class="gallery-empty" id="galleryEmpty">
+        Zdjęcia pojawią się tutaj wkrótce. Tymczasem zapraszam na
+        <a href="https://www.facebook.com/profile.php?id=61575326581604" target="_blank" rel="noopener">nasz fanpage na Facebooku</a>.
+      </p>
+    </div>
+  </section>
+
   <!-- ===================== FAQ ===================== -->
-  <section class="section" id="faq">
+  <section class="section section-alt" id="faq">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">FAQ</p>
@@ -508,6 +535,12 @@
   </footer>
 
   <a href="#top" class="to-top" id="toTop" aria-label="Wróć na górę">↑</a>
+
+  <!-- Powiększanie zdjęć z galerii -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
+    <img id="lightboxImg" src="" alt="Powiększone zdjęcie ze szkolenia" />
+  </div>
 
   <script src="script.js"></script>
 </body>
