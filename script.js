@@ -46,6 +46,40 @@ if (lightbox) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 }
 
+// Formularz kontaktowy — wysyłka przez FormSubmit (bez przeładowania strony)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const status = document.getElementById('formStatus');
+  const submitBtn = contactForm.querySelector('.form-submit');
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    status.className = 'form-status';
+    status.textContent = 'Wysyłanie…';
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/hoffmed.jakub@gmail.com', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(contactForm),
+      });
+      const data = await res.json();
+      if (res.ok && String(data.success) === 'true') {
+        contactForm.reset();
+        status.className = 'form-status form-status--ok';
+        status.textContent = 'Dziękujemy! Wiadomość została wysłana — odezwę się wkrótce.';
+      } else {
+        throw new Error(data.message || 'Błąd wysyłki');
+      }
+    } catch (err) {
+      status.className = 'form-status form-status--err';
+      status.innerHTML =
+        'Nie udało się wysłać. Napisz bezpośrednio na <a href="mailto:hoffmed.jakub@gmail.com">hoffmed.jakub@gmail.com</a>.';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+}
+
 // Jeśli brak zdjęć w galerii — pokaż komunikat zastępczy
 window.addEventListener('load', () => {
   const empty = document.getElementById('galleryEmpty');

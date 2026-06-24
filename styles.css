@@ -334,8 +334,53 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 48px;
-  align-items: center;
+  align-items: start;
 }
+
+/* Formularz kontaktowy */
+.contact-form { margin-top: 28px; display: grid; gap: 16px; }
+.form-row { display: grid; gap: 6px; }
+.form-row label { color: #c3cedd; font-weight: 600; font-size: 0.95rem; }
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: #8294ab; }
+.contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238294ab' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 42px;
+  cursor: pointer;
+}
+/* Lista rozwijana — ciemny tekst na białym tle systemowym */
+.contact-form select option { color: var(--ink); }
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--red);
+  background: rgba(255, 255, 255, 0.1);
+}
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.form-honey { display: none !important; }
+.form-submit { margin-top: 4px; justify-self: start; cursor: pointer; border: none; }
+.form-submit:disabled { opacity: 0.6; cursor: default; }
+.form-status { font-size: 0.95rem; min-height: 1.2em; margin-top: -4px; }
+.form-status--ok { color: #6ee7a8; font-weight: 600; }
+.form-status--err { color: #ff9aa2; }
+.form-status--err a { color: #fff; text-decoration: underline; }
 .contact-cards { display: grid; gap: 16px; }
 .contact-card {
   background: rgba(255, 255, 255, 0.06);
